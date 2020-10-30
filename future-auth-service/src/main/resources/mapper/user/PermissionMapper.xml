@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qinghe.future.user.mapper.PermissionMapper">
+
+    <select id="getPermissionListByUserId" resultType="com.qinghe.future.user.entity.Permission">
+        SELECT
+            up.*
+        FROM
+            user_user_role_mid urm
+            INNER JOIN user_role_permission_mid rpm ON urm.role_id = rpm.role_id
+            INNER JOIN user_permission up ON rpm.resources_id = up.id
+        WHERE
+            urm.user_id = #{userId}
+        ORDER BY
+            pid DESC,
+            sort DESC
+    </select>
+</mapper>
